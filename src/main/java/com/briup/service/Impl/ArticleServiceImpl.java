@@ -34,7 +34,7 @@ public class ArticleServiceImpl implements IArticleService{
 				if(title!=null) {
 					article_db.setTitle(title);
 				}
-				if(category.getId()!=null) {
+				if(category!=null) {
 					article_db.setCategory(category);
 				}
 				articleDao.save(article_db);
@@ -63,6 +63,7 @@ public class ArticleServiceImpl implements IArticleService{
 
 	@Override
 	public List<Article> findAll() {
+		System.out.println(articleDao);
 		List<Article> articlelist = articleDao.findAll();
 		return articlelist;
 	}

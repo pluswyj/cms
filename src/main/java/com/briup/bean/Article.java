@@ -13,24 +13,31 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name="cms_article")
-
+@ApiModel
 public class Article {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ApiModelProperty(value="文章id")
 	private Integer id;
+	@ApiModelProperty(value="文章作者")
 	private String author;
+	@ApiModelProperty(value="点击次数",hidden=true)
 	private int clickTimes;//click_times
+	@ApiModelProperty(value="文章内容")
 	private String content;
+	@ApiModelProperty(value="点击次数",hidden=true)
 	private Date publishDate;//publish_date
+	@ApiModelProperty(value="标题")
 	private String title;
 	
 	@ManyToOne
 	@JoinColumn(name="category_id")
-	
 	private Category category;
-	
 	
 	public Article() {}
 
