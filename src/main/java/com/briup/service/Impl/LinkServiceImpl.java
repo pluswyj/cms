@@ -23,8 +23,11 @@ public class LinkServiceImpl implements ILinkService {
 		if (link != null) {
 			Integer id = link.getId();
 			if (id == null) {
+				System.out.println("------before----");
 				linkDao.save(link);
+				System.out.println("------After----");
 			} else {
+				System.out.println("----xxx---");
 				// 根据id查询link
 				Link link_db = linkDao.findById(id).get();
 				if (link.getName() != null) {
@@ -52,14 +55,16 @@ public class LinkServiceImpl implements ILinkService {
 
 	@Override
 	public Link findById(Integer id){
-	Link link = linkDao.findById(id).get();
+	Optional<Link> opt = linkDao.findById(id);
+	Link link = opt.isPresent()?opt.get():null;
 	return link;
 	}
 
 	@Override
 	public void deleteById(Integer id) throws Exception {
 	 // 根据id查询link,如果link 不存在 说明id在数据库中不存在
-	     Link link = linkDao.findById(id).get();
+	    Optional<Link> opt = linkDao.findById(id);
+	    Link link= opt.isPresent()?opt.get():null;
 	     if(link!=null) {
 	    	 linkDao.deleteById(id);
 	     }else {
